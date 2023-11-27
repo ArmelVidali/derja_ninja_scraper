@@ -7,7 +7,7 @@ import re
 from download_audio import download_mp3
 
 
-with open("json/sample.json", 'r') as json_file:
+with open("json/top_5000_words.json", 'r') as json_file:
     word_list = json.load(json_file)
 
 
@@ -85,8 +85,7 @@ for word in word_list:
         By.CSS_SELECTOR, '.navbar > a:nth-child(2)')
     main_page.click()
     time.sleep(1)
-    if i == 15:
-        break
+
 driver.quit()
 
 file_name = "translations_results.json"

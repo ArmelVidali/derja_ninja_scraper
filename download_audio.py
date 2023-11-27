@@ -4,7 +4,7 @@ import requests
 def download_mp3(mp3_url, output_name):
 
     file_url = mp3_url
-    output_file = output_name
+    output_file = output_name + ".mp3"
 
     response = requests.get(file_url)
 
