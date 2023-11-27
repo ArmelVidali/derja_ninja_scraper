@@ -16,6 +16,10 @@ Run scraper.py to start scraping :
 
     python scraper.py
 
+Run anki.py (need Anki app installed on your computer, with Anki connector https://foosoft.net/projects/anki-connect/ )
+
+    python anki.py
+
 ## Output
 
 You will get a `translations_results.json` with the translations and an `audios` folder containing audio files for each translated word and sample sentence provided by Derja Ninja
