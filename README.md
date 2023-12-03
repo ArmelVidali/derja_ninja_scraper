@@ -1,6 +1,6 @@
-# derja_ninja_scraper
+# Build your Tunisian arabic dataset
 
-Get Tunisian translation, audio and sample sentence for the most common 5000 english word for the awsome website https://derja.ninja/
+Get Tunisian translation, audio and sample sentence for the most common 20.000 english word for the awsome website https://derja.ninja/
 
 ## Install
 
