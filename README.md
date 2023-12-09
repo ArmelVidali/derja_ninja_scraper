@@ -2,6 +2,8 @@
 
 Get Tunisian translation, audio and sample sentence for the most common 20.000 english word for the awsome website https://derja.ninja/
 
+You can get the Anki flashcard deck i created with this script, containing 11.215 words and sentences here : https://ankiweb.net/shared/info/1875413457
+
 ## Install
 
 To download the project, run 
@@ -16,10 +18,11 @@ Run scraper.py to start scraping :
 
     python scraper.py
 
-Run anki.py (need Anki app installed on your computer, with Anki connector https://foosoft.net/projects/anki-connect/ )
+Run anki.py (need Anki app installed on your computer, with Anki connector https://foosoft.net/projects/anki-connect/, with the Anki desktop app opened)
 
     python anki.py
 
 ## Output
 
-You will get a `translations_results.json` with the translations and an `audios` folder containing audio files for each translated word and sample sentence provided by Derja Ninja
+You will get a `translations_results.json` with the translations and an audio url for each translated word and sample sentence provided by Derja Ninja.
+If you want to download the audios, use the `download_mp3` function from `download_audios.py`.
