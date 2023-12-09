@@ -5,8 +5,7 @@ Get Tunisian translation, audio and sample sentence for the most common 20.000 e
 You can get the Anki flashcard deck i created with this script, containing 11.215 words and sentences here : https://ankiweb.net/shared/info/1875413457, looking like this : 
 
 
-<img src="https://github.com/ArmelVidali/derja_ninja_scraper/assets/84096571/d8b1de12-69b1-4d2d-b747-7ff48893b823" alt="image" width="300">
-
+<img src="https://github.com/ArmelVidali/derja_ninja_scraper/assets/84096571/3f2b949d-7352-4383-b431-13942140f17f" alt="image" width="300">
 
 
 
