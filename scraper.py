@@ -5,10 +5,9 @@ import json
 import time
 import re
 import os
-from download_audio import download_mp3
 
 initial_path = os.getcwd()
-with open("translations_results_20k.json", 'r', encoding='utf-8') as json_file:
+with open("YOUR_JSON_PATH", 'r', encoding='utf-8') as json_file:
     word_list = json.load(json_file)
 
 nb_mots = 0
@@ -93,13 +92,13 @@ for word in word_list:
 
 driver.quit()
 
-file_name = "translations_results_11k.json"
+file_name = "YOUR_FILE_NAME"
 
 os.chdir(initial_path)
 with open(file_name, 'w', encoding='utf-8') as file:
     json.dump(output_object, file, ensure_ascii=False)
 
-with open("not_found_list_11k.json", 'w', encoding='utf-8') as file:
+with open(f"output_json/{file_name}", 'w', encoding='utf-8') as file:
     json.dump(word_not_found, file, ensure_ascii=False)
 
 print(nb_mots)
