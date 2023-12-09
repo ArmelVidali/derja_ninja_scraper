@@ -8,26 +8,27 @@ import os
 from download_audio import download_mp3
 
 initial_path = os.getcwd()
-with open("json/top_5000_words.json", 'r') as json_file:
+with open("translations_results_20k.json", 'r', encoding='utf-8') as json_file:
     word_list = json.load(json_file)
 
 nb_mots = 0
 nb_essais = 0
+# Output list of unfound words
 word_not_found = []
 driver = webdriver.Firefox()
 
 driver.get('https://derja.ninja/')
 output_object = {}
 for word in word_list:
+    # to be printed
     nb_essais += 1
 
-    search_word = word["be"]
+    search_word = word
 
     input_element = driver.find_element(
         By.CSS_SELECTOR, ".search-input.search-input--large.js-search-input")
     input_element.send_keys(search_word)
 
-    # Adjust the selector accordingly
     ok_button = driver.find_element(By.CSS_SELECTOR, '.search-button')
     ok_button.click()
 
@@ -49,17 +50,18 @@ for word in word_list:
         # finally extract only the arabic alphabet word
         search_result__term_in_arabic = re.sub(
             r'[^؀-\u07FF\s]+', '', search_result__term_in_arabic)
-        # get the audio, might not exist
-        try:
-            word_audio_arabic = results[0].find(
-                'div', class_='search-result__term_in_arabic').find("audio").get("src")
-            download_mp3(word_audio_arabic,
-                         f"{search_word}_translation_{0}")
-        except Exception as e:
-            print(e)
 
         # Get the first 3 results for the query
         for i in range(min(len(results), 3)):
+            audio_found = False
+
+            # Some elements might not have an audio file
+            try:
+                sentence_audio_arabic = results[i].find(
+                    'div', class_='search_result__example_sentence_in_arabic').find("audio").get("src")
+                audio_found = True
+            except Exception as e:
+                print(e)
 
             # get sample sentence in english
             search_result__example_sentence_in_english = results[i].find(
@@ -71,17 +73,13 @@ for word in word_list:
                 'span', class_='example-sentence').text
 
             output_object[search_word]["result"] = search_result__term_in_arabic
-            output_object[search_word
-                          ][f"sample_{i}"] = [search_result__example_sentence_in_english, search_result__example_sentence_in_arabic]
+            if audio_found:
+                output_object[search_word
+                              ][f"sample_{i}"] = [search_result__example_sentence_in_english, search_result__example_sentence_in_arabic, sentence_audio_arabic]
+            else:
+                output_object[search_word
+                              ][f"sample_{i}"] = [search_result__example_sentence_in_english, search_result__example_sentence_in_arabic]
 
-            # Some elements might not have an audio file
-            try:
-                sentence_audio_arabic = results[i].find(
-                    'div', class_='search_result__example_sentence_in_arabic').find("audio").get("src")
-                download_mp3(sentence_audio_arabic,
-                             f"{search_word}_sample_sentence_translation_{i}")
-            except Exception as e:
-                print(e)
         print(f"{nb_mots}/{nb_essais}")
     else:
         word_not_found.append(word)
@@ -95,13 +93,13 @@ for word in word_list:
 
 driver.quit()
 
-file_name = "translations_results.json"
+file_name = "translations_results_11k.json"
 
 os.chdir(initial_path)
 with open(file_name, 'w', encoding='utf-8') as file:
     json.dump(output_object, file, ensure_ascii=False)
 
-with open("not_found_list.json", 'w', encoding='utf-8') as file:
+with open("not_found_list_11k.json", 'w', encoding='utf-8') as file:
     json.dump(word_not_found, file, ensure_ascii=False)
 
 print(nb_mots)
