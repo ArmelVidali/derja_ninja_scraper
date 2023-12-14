@@ -32,3 +32,8 @@ Run anki.py (need Anki app installed on your computer, with Anki connector https
 
 You will get a `translations_results.json` with the translations and an audio url for each translated word and sample sentence provided by Derja Ninja.
 If you want to download the audios, use the `download_mp3` function from `download_audios.py`.
+
+
+# Contribution
+
+This project is open to any contribution, I'd be happy to add new features or make a website out of it !
